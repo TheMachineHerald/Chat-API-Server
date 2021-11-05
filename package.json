@@ -1,0 +1,47 @@
+{
+  "name": "chat-api-server",
+  "version": "1.0.0",
+  "description": "Express API server for Chat-Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/.bin/babel-node index.js",
+    "wp-start": "webpack-dev-server --mode development",
+    "build-dev": "webpack --mode development",
+    "dev": "npm run build-dev && npm run start",
+    "lint": "eslint node_modules/.bin/eslint './**' --fix"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "date-and-time": "^2.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheMachineHerald/Chat-API-Server.git"
+  },
+  "author": "TheMachineHerald/Dion Cavanaugh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheMachineHerald/Chat-API-Server/issues"
+  },
+  "homepage": "https://github.com/TheMachineHerald/Chat-API-Server#readme"
+}
