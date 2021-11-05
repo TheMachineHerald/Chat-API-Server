@@ -9,7 +9,10 @@
     "wp-start": "webpack-dev-server --mode development",
     "build-dev": "webpack --mode development",
     "dev": "npm run build-dev && npm run start",
-    "lint": "eslint node_modules/.bin/eslint './**' --fix"
+    "lint": "eslint node_modules/.bin/eslint './**' --fix",
+    "ts-build": "bash bin/bash/build-clean.bash && npm run tsb",
+		"ts-start": "node build/index.js",
+    "tsb": "tsc --outDir build --esModuleInterop --resolveJsonModule --lib es6 --module commonjs --allowJs true --noImplicitAny true"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -32,7 +35,9 @@
     "eslint-plugin-promise": "^5.1.1",
     "webpack": "^5.58.2",
     "webpack-cli": "^4.9.0",
-    "webpack-dev-server": "^4.3.1"
+    "webpack-dev-server": "^4.3.1",
+    "@types/express": "^4.17.13",
+		"@types/node": "^16.11.6"
   },
   "repository": {
     "type": "git",

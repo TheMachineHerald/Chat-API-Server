@@ -17,7 +17,7 @@ app.use("/api", API)
 app.get("/", (req, res) => {
 	res.json({
 		statusCode: 200,
-		message: "Home Route"
+		message: "Chat API Home Route"
 	})
 })
 
