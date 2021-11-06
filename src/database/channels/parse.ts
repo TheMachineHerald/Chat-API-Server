@@ -7,7 +7,7 @@ function parse(data: _RowDataPacket[]) {
 	}
 
 	try {
-		data.forEach((row: _RowDataPacket)=> {
+		data.forEach((row: _RowDataPacket): void => {
 			const tmp = Object.assign({})
 			Object.keys(row).forEach(prop => {
 				tmp[prop] = row[prop]
