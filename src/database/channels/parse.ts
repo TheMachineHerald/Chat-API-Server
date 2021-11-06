@@ -1,4 +1,4 @@
-function parse(data: _RowDataPacket[]) {
+function parse(data: _RowDataPacket[]): _CHANNELS {
 	const channels: _CHANNELS = {
 		selected_channel_id: null,
 		selected_channel_name: "",

@@ -19,6 +19,8 @@ declare global {
     type _Router = Router
     type _Pool = Pool
     type _RowDataPacket = RowDataPacket
+    type _reject = Promise.reject<T>
+    type _resolve = Promise.resolve<T>
     
     interface db_connection extends Global {
         _writeTestError: Function,
@@ -136,8 +138,8 @@ declare global {
             }
 
             interface PARSE_REJECT_RESOLVE {
-                resolve: Promise.resolve
-                reject: Promise.reject
+                resolve: _resolve<void>
+                reject: _reject<number>
             }
 
             interface REGISTER_ROUTE_PAYLOAD {

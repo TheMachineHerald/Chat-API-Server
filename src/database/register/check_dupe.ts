@@ -1,4 +1,4 @@
-function parse(obj: _RowDataPacket, ctx: PARSE_REJECT_RESOLVE) {
+function parse(obj: _RowDataPacket, ctx: PARSE_REJECT_RESOLVE): _resolve | _reject {
 	Object.keys(obj).forEach(prop => {
 		return ((obj[prop] === 0) ? ctx.resolve() : ctx.reject(-1))
 	})
