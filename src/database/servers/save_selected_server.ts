@@ -1,5 +1,5 @@
-function parse(data) {
-	const selected_server = {
+function parse(data: _RowDataPacket[][]): SELECTED_SERVER {
+	const selected_server: SELECTED_SERVER = {
 		server_id: null,
 		server_name: "",
 		selected_channel_id: null,
@@ -11,9 +11,9 @@ function parse(data) {
 	}
 
 	try {
-		data[1].forEach(row => {
-			const tmp = {}
-			Object.keys(row).forEach(prop => {
+		data[1].forEach((row: _RowDataPacket): void => {
+			const tmp = Object.assign({})
+			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
 			})
 
@@ -29,33 +29,32 @@ function parse(data) {
 		})
 	} catch (e) {
 		console.log(e)
-		return null
 	} finally {
 		return selected_server
 	}
 }
 
-function save_selected_server(connection, ctx) {
-	return new Promise((resolve, reject) => {
+function save_selected_server(connection: _Pool, ctx: SAVE_SELECTED_SERVER_REQUEST_BODY) {
+	return new Promise<SELECTED_SERVER>((resolve, reject) => {
 		const update = `
-            UPDATE Users
-            SET 
-              selected_server_id = ${connection.escape(ctx.server_id)},
-              selected_server_name = ${connection.escape(ctx.server_name)}
-            WHERE id = ${connection.escape(ctx.user_id)}
+			UPDATE Users
+			SET 
+				selected_server_id = ${connection.escape(ctx.server_id)},
+				selected_server_name = ${connection.escape(ctx.server_name)}
+			WHERE id = ${connection.escape(ctx.user_id)}
         `
 		const select = `
-            SELECT *
-            FROM User_Channels as uc
-            WHERE 
-              uc.server_id = ${connection.escape(ctx.server_id)}
-            AND
-              uc.user_id = ${connection.escape(ctx.user_id)}
+			SELECT *
+			FROM User_Channels as uc
+			WHERE 
+				uc.server_id = ${connection.escape(ctx.server_id)}
+			AND
+				uc.user_id = ${connection.escape(ctx.user_id)}
         `
 		const statement = [update, select]
 
-		connection.query(statement.join(";"), (err, results) => {
-			if (err) reject(500)
+		connection.query(statement.join(";"), (err, results: _RowDataPacket[][]) => {
+			if (err) return reject(500)
 			if (!results) {
 				console.log("failed query")
 				return reject(404)

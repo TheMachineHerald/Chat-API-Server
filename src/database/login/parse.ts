@@ -1,11 +1,11 @@
 /**
  * Parses out MySQL meta data from database response
- * &&
+ * 					&&
  * Creates User Object for redux consumption
  */
-function parse(data) {
-	const servers = []
-	const selected_server = {
+function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
+	const servers: Array<SERVER> = []
+	const selected_server: SELECTED_SERVER = {
 		server_id: null,
 		server_name: "",
 		selected_channel_id: null,
@@ -17,23 +17,23 @@ function parse(data) {
 	}
 
 	try {
-		data[1].forEach(row => {
-			const tmp = {}
-			Object.keys(row).forEach(prop => {
+		data[1].forEach((row: _RowDataPacket): void => {
+			const tmp = Object.assign({})
+			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
 			})
 			servers.push(tmp)
 		})
 
-		data[2].forEach(row => {
-			const tmp = {}
-			Object.keys(row).forEach(prop => {
+		data[2].forEach((row: _RowDataPacket): void => {
+			const tmp = Object.assign({})
+			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
 			})
 
 			if (
 				!selected_server.server_id &&
-              !selected_server.server_name
+				!selected_server.server_name
 			) {
 				selected_server.server_id = tmp.server_id
 				selected_server.server_name = tmp.server_name

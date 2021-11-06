@@ -7,7 +7,7 @@ import { router as servers_route } from "./servers"
 import { router as friends_route } from "./friends"
 import { router as hydrate_route } from "./hydrate"
 
-const API = express.Router()
+const API: _Router = express.Router()
 
 API.use("/login", login_route)
 API.use("/logout", logout_route)
@@ -17,7 +17,7 @@ API.use("/friends", friends_route)
 API.use("/servers", servers_route)
 API.use("/hydrate", hydrate_route)
 
-API.get("/", (req, res) => {
+API.get("/", (req: _Request, res: _Response): void => {
 	res.json({
 		statusCode: 200,
 		message: "API Route"

@@ -1,4 +1,4 @@
-function create_channel(user_id) {
+function create_channel(user_id: number) {
 
 }
 

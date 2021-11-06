@@ -1,5 +1,5 @@
-function parse(data) {
-	const channels = {
+function parse(data: _RowDataPacket[]) {
+	const channels: _CHANNELS = {
 		selected_channel_id: null,
 		selected_channel_name: "",
 		text: [],
@@ -7,8 +7,8 @@ function parse(data) {
 	}
 
 	try {
-		data.forEach(row => {
-			const tmp = {}
+		data.forEach((row: _RowDataPacket)=> {
+			const tmp = Object.assign({})
 			Object.keys(row).forEach(prop => {
 				tmp[prop] = row[prop]
 			})

@@ -1,4 +1,4 @@
-function add_friend(user_id) {
+function add_friend(user_id: number) {
 
 }
 

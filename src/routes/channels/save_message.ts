@@ -3,7 +3,7 @@ import { save_message } from "../../database/channels"
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
+router.post("/", (req: _Request, res: _Response): void => {
 	const {
 		channel_id,
 		server_id,
@@ -21,15 +21,15 @@ router.post("/", (req, res) => {
 	}
 
 	save_message(db_connection, ctx)
-		.then(resolve => {
-			return res.status(200).json({
+		.then((resolve: void) => {
+			res.status(200).json({
 				message: "Saved channel message"
 			})
 		})
-		.catch(err => {
+		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger
 			console.log(err)
-			return res.status(err).json({
+			res.status(err).json({
 				status: err,
 				error: "Bad Request"
 			})

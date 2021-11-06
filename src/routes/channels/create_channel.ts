@@ -1,9 +1,9 @@
 import express from "express"
-import { create_channels } from "../../database/channels"
+import { create_channel } from "../../database/channels"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
-router.post("/", (req, res) => {
+router.post("/", (req: _Request, res: _Response): void => {
 	res.json({
 		status: 200,
 		msg: "create-channel route"

@@ -14,19 +14,19 @@ router.use("/save-selected-channel", save_selected_channel)
 router.use("/save-message", save_message)
 router.use("/users", channel_users)
 
-router.get("/:user_id", (req, res) => {
-	const user_id = req.params.user_id
+router.get("/:user_id", (req: _Request, res: _Response): void => {
+	const user_id = parseInt(req.params.user_id)
 
 	get_channels(db_connection, user_id)
-		.then(channels => {
-			return res.status(200).json({
+		.then((channels: _RowDataPacket[]) => {
+			res.status(200).json({
 				channels: channels
 			})
 		})
-		.catch(err => {
+		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger
 			console.log(err)
-			return res.status(err).json({
+			res.status(err).json({
 				status: err,
 				error: "Bad Request"
 			})

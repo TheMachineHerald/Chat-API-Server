@@ -1,17 +1,17 @@
-function getConference(connection, conferenceSid) {
-	return new Promise(resolve => {
+function getConference(connection: _Pool, conferenceSid: number) {
+	return new Promise<void | _RowDataPacket[]>(resolve => {
 		const select = `
-      SELECT * FROM
-      conferences
-      WHERE conferenceSid = '${conferenceSid}'
-    `
+			SELECT * FROM
+			conferences
+			WHERE conferenceSid = '${conferenceSid}'
+		`
 		console.log("RUNNING GET CONFERENCE")
-		connection.query(select, (err, response) => {
+		connection.query(select, (err, response: _RowDataPacket[]) => {
 			if (err) {
 				console.log(err)
 				return resolve()
 			}
-			console.log("[GET DATA]: ", response)
+			console.log("[GET CONFERENCE]: ", response)
 			return resolve(response)
 		})
 	})

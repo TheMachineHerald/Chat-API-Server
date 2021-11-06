@@ -1,4 +1,4 @@
-function save_message(user_id) {
+function save_message(user_id: number) {
 
 }
 
