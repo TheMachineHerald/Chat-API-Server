@@ -6,7 +6,7 @@ function get_data(connection: _Pool, user_id: number) {
 			FROM User_Channels
 			WHERE user_id = ${connection.escape(user_id)}
 			AND is_selected = 1
-        `
+		`
 		connection.query(statement, (err, results: _RowDataPacket[]) => {
 			if (err) return reject(500)
 			if (!results) {
@@ -14,7 +14,7 @@ function get_data(connection: _Pool, user_id: number) {
 				return reject(404)
 			}
 
-			return resolve(results)
+				return resolve(results)
 		})
 	})
 }

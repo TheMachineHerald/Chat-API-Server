@@ -1,6 +1,6 @@
 /**
  * Parses out MySQL meta data from database response
- * 					&&
+ * 		&&
  * Creates User Object for redux consumption
  */
 function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
