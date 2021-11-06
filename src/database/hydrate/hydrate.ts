@@ -14,7 +14,7 @@ function get_data(connection: _Pool, user_id: number) {
 				return reject(404)
 			}
 
-				return resolve(results)
+			return resolve(results)
 		})
 	})
 }
