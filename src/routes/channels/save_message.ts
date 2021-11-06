@@ -1,7 +1,7 @@
 import express from "express"
 import { save_message } from "../../database/channels"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.post("/", (req: _Request, res: _Response): void => {
 	const {
@@ -12,7 +12,7 @@ router.post("/", (req: _Request, res: _Response): void => {
 		message
 	} = req.body
 
-	const ctx = {
+	const ctx: SAVE_MESSAGE_CONTEXT = {
 		channel_id,
 		server_id,
 		user_id,

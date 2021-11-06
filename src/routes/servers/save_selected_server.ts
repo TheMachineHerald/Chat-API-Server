@@ -1,7 +1,7 @@
 import express from "express"
 import { save_selected_server } from "../../database/servers"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.post("/", (req: _Request, res: _Response): void => {
 	const { user_id, server_id, server_name }: SAVE_SELECTED_SERVER_REQUEST_BODY = req.body

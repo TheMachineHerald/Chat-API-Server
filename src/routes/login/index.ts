@@ -5,7 +5,7 @@ const router: _Router = express.Router()
 
 router.post("/", (req: _Request, res: _Response): void => {
 	// sanitize data > validate(req.body)
-	const { email, password } = req.body
+	const { email, password }: LOGIN_ROUTE_BODY = req.body
 	user_login(db_connection, { email: email, password: password })
 		.then((payload: LOGIN_ROUTE_PAYLOAD) => {
 			res.status(200).json({

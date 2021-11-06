@@ -1,9 +1,9 @@
 import express from "express"
 import { save_selected_channel } from "../../database/channels"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
-router.post("/", (req, res): void => {
+router.post("/", (req: _Request, res: _Response): void => {
 	const ctx: SAVE_SELECTED_CHANNEL_REQUEST_BODY = req.body
 
 	save_selected_channel(db_connection, ctx)

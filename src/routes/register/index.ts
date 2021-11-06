@@ -1,7 +1,7 @@
 import express from "express"
 import user_register from "../../database/register"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.post("/", (req: _Request, res: _Response): void => {
 	const user: REGISTER_ROUTE_REQUEST_BODY = req.body

@@ -1,5 +1,5 @@
 function get_channel_users(connection: _Pool, channel_id: number) {
-	return new Promise<any>((resolve, reject) => {
+	return new Promise<Array<CHANNEL_USER>>((resolve, reject) => {
 		const statement = `
 			SELECT
 				u.id, u.user_name, u.first_name, u.last_name, u.email, u.status
@@ -7,7 +7,7 @@ function get_channel_users(connection: _Pool, channel_id: number) {
 			INNER JOIN Users as u
 			ON uc.user_id = u.id
 			AND uc.channel_id = ?
-         `
+		`
 		connection.query(statement, [channel_id], (err, results: _RowDataPacket[]) => {
 			if (err) return reject(500)
 			if (!results) {

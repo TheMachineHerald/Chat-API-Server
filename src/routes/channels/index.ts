@@ -6,7 +6,7 @@ import { router as save_message } from "./save_message"
 import { router as channel_users } from "./channel_users"
 import { get_channels } from "../../database/channels"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.use("/create-channel", create_channel)
 router.use("/messages", get_channel_messages)
@@ -15,7 +15,7 @@ router.use("/save-message", save_message)
 router.use("/users", channel_users)
 
 router.get("/:user_id", (req: _Request, res: _Response): void => {
-	const user_id = parseInt(req.params.user_id)
+	const user_id: number = parseInt(req.params.user_id)
 
 	get_channels(db_connection, user_id)
 		.then((channels: _RowDataPacket[]) => {

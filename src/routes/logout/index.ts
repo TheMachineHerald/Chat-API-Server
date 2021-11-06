@@ -1,7 +1,7 @@
 import express from "express"
 import { logout_user } from "../../database/logout"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.post("/", (req: _Request, res: _Response): void => {
 	const { user_id } = req.body
