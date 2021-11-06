@@ -9,7 +9,7 @@ function parse(data: _RowDataPacket[]): _CHANNELS {
 	try {
 		data.forEach((row: _RowDataPacket): void => {
 			const tmp = Object.assign({})
-			Object.keys(row).forEach(prop => {
+			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
 			})
 
