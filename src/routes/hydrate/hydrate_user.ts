@@ -1,10 +1,10 @@
 import express from "express"
 import { hydrate_user } from "../../database/hydrate"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.get("/:user_id", (req: _Request, res: _Response): void => {
-	const user_id = parseInt(req.params.user_id)
+	const user_id: number = parseInt(req.params.user_id)
 
 	hydrate_user(db_connection, user_id)
 		.then((data: _RowDataPacket[]) => {

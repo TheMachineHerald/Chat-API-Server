@@ -1,9 +1,9 @@
+import Global = NodeJS.Global
 import {
     Application,
     Request,
     Response
 } from "express"
-import Global = NodeJS.Global
 import { Pool, RowDataPacket } from "mysql2"
 
 declare global {
@@ -19,15 +19,15 @@ declare global {
     type _Router = Router
     type _Pool = Pool
     type _RowDataPacket = RowDataPacket
-
+    
     interface db_connection extends Global {
         _writeTestError: Function,
         db_connectionRuntimeErrors: Array<Error | string>,
         db_connectionOpts: Object,
         db_connectionUncaughtExceptionTriggered: boolean
     }
-    declare var db_connection: Global 
 
+    declare var db_connection: Global 
 
     /**
      * Application Types
@@ -35,6 +35,33 @@ declare global {
      * @NOTE Application specific types are all
      *       capitalized and snake cased
      */
+
+     interface USER {
+        id: number
+        first_name: string
+        last_name: string
+        user_name: string
+        email: string
+        passwrd: string
+        status: number
+        selected_server_id: number
+        selected_server_name: string
+        created_date: string
+    }
+
+    interface SERVER {
+        server_id: number
+        server_name: string
+        created_by_user_id: number
+    }
+
+    interface SELECTED_SERVER {
+        server_id: number | null
+        server_name: string
+        selected_channel_id: number | null
+        selected_channel_name: string
+        channels: Object<CHANNELS>
+    }
 
      interface CHANNEL {
         id: number
@@ -75,33 +102,6 @@ declare global {
     }
     
     //<Login_Route>
-            interface USER {
-                id: number
-                first_name: string
-                last_name: string
-                user_name: string
-                email: string
-                passwrd: string
-                status: number
-                created_date: string
-                selected_server_id: number
-                selected_server_name: string
-            }
-
-            interface SERVER {
-                server_id: number
-                server_name: string
-                created_by_user_id: number
-            }
-
-            interface SELECTED_SERVER {
-                server_id: number | null
-                server_name: string
-                selected_channel_id: number | null
-                selected_channel_name: string
-                channels: Object<CHANNELS>
-            }
-
             interface LOGIN_ROUTE_PAYLOAD {
                 user: USER
                 servers: Array<SERVER>
@@ -122,6 +122,7 @@ declare global {
             /**
              * PromiseRejectionResult Type
              */
+
             type STATUS_CODE = number
     //</Login_Route>
 

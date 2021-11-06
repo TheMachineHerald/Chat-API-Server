@@ -3,13 +3,13 @@ import { router as create_server } from "./create_server"
 import { router as save_selected_server } from "./save_selected_server.js"
 import { get_servers } from "../../database/servers"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.use("/create-server", create_server)
 router.use("/save-selected-server", save_selected_server)
 
 router.get("/:user_id", (req: _Request, res: _Response): void => {
-	const user_id = parseInt(req.params.user_id)
+	const user_id: number = parseInt(req.params.user_id)
 
 	get_servers(db_connection, user_id)
 		.then((servers: _RowDataPacket[]) => {

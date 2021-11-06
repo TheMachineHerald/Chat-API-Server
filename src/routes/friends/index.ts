@@ -1,7 +1,7 @@
 import express from "express"
 import { get_friends, add_friend } from "../../database/friends"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.get("/", (req: _Request, res: _Response): void => {
 	res.send("friends GET route")

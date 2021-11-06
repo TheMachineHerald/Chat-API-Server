@@ -1,10 +1,10 @@
 import express from "express"
 import { get_channel_users } from "../../database/channels"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
 router.get("/:channel_id", (req: _Request, res: _Response): void => {
-	const channel_id = parseInt(req.params.channel_id)
+	const channel_id: number = parseInt(req.params.channel_id)
 
 	get_channel_users(db_connection, channel_id)
 		.then((channel_users: Array<CHANNEL_USER>) => {
