@@ -8,19 +8,19 @@ const router = express.Router()
 router.use("/create-server", create_server)
 router.use("/save-selected-server", save_selected_server)
 
-router.get("/:user_id", (req, res) => {
-	const user_id = req.params.user_id
+router.get("/:user_id", (req: _Request, res: _Response): void => {
+	const user_id = parseInt(req.params.user_id)
 
 	get_servers(db_connection, user_id)
-		.then(servers => {
-			return res.status(200).json({
+		.then((servers: _RowDataPacket[]) => {
+			res.status(200).json({
 				servers: servers
 			})
 		})
-		.catch(err => {
+		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger
 			console.log(err)
-			return res.status(err).json({
+			res.status(err).json({
 				status: err,
 				error: "Bad Request"
 			})

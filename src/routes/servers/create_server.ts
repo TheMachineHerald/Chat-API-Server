@@ -1,27 +1,27 @@
 import express from "express"
 import { create_server } from "../../database/servers"
 
-const router = express.Router()
+const router: _Router = express.Router()
 
-router.post("/", (req, res) => {
-	const user = req.body
+router.post("/", (req: _Request, res: _Response): void  => {
+	const user: CREATE_SERVER_REQUEST_BODY = req.body
 
 	create_server(db_connection, user)
-		.then(user => {
-			return res.status(200).json({
+		.then((server: _RowDataPacket[]) => {
+			res.status(200).json({
 				message: "Created Server!",
 				server: server
 			})
 		})
-		.catch(err => {
+		.catch((err: number) => {
 			if (err === -1) {
-				return res.status(404).json({
+				res.status(404).json({
 					status: 404,
 					error: "Invalid Request"
 				})
 			}
 
-			return res.status(500).json({
+			res.status(500).json({
 				status: 500,
 				error: "Not Allowed"
 			})

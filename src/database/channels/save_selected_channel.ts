@@ -1,7 +1,7 @@
 import parse from "./parse"
 
-function save_selected_channel(connection, ctx) {
-	return new Promise((resolve, reject) => {
+function save_selected_channel(connection: _Pool, ctx: SAVE_SELECTED_CHANNEL_REQUEST_BODY) {
+	return new Promise<SAVE_SELECTED_CHANNEL_PAYLOAD>((resolve, reject) => {
 		const toggle_off = `
             UPDATE User_Channels
             Set is_selected = 0
@@ -30,8 +30,8 @@ function save_selected_channel(connection, ctx) {
         `
 		const statement = [toggle_off, toggle_on, channels, channel_messages]
 
-		connection.query(statement.join(";"), (err, results) => {
-			if (err) reject(500)
+		connection.query(statement.join(";"), (err, results: _RowDataPacket[][]) => {
+			if (err) return reject(500)
 			if (!results) {
 				console.log("failed update")
 				return reject(404)

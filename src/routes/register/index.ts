@@ -3,25 +3,25 @@ import user_register from "../../database/register"
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
-	const user = req.body
+router.post("/", (req: _Request, res: _Response): void => {
+	const user: REGISTER_ROUTE_REQUEST_BODY = req.body
 
 	user_register(db_connection, user)
-		.then(user => {
-			return res.status(200).json({
+		.then((user: REGISTER_ROUTE_PAYLOAD) => {
+			res.status(200).json({
 				message: "Created User!",
 				user: user
 			})
 		})
-		.catch(err => {
+		.catch((err: number) => {
 			if (err === -1) {
-				return res.status(404).json({
+				res.status(404).json({
 					status: 404,
 					error: "Invalid Request"
 				})
 			}
 
-			return res.status(500).json({
+			res.status(500).json({
 				status: 500,
 				error: "Not Allowed"
 			})

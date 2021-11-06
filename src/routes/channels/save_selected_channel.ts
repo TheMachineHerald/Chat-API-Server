@@ -3,17 +3,17 @@ import { save_selected_channel } from "../../database/channels"
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
-	const ctx = req.body
+router.post("/", (req, res): void => {
+	const ctx: SAVE_SELECTED_CHANNEL_REQUEST_BODY = req.body
 
 	save_selected_channel(db_connection, ctx)
-		.then(resolve => {
-			return res.status(200).json(resolve)
+		.then((payload: SAVE_SELECTED_CHANNEL_PAYLOAD) => {
+			res.status(200).json(payload)
 		})
-		.catch(err => {
+		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger
 			console.log(err)
-			return res.status(err).json({
+			res.status(err).json({
 				status: err,
 				error: "Bad Request"
 			})
