@@ -39,18 +39,18 @@ function save_selected_server(connection: _Pool, ctx: SAVE_SELECTED_SERVER_REQUE
 		const update = `
 			UPDATE Users
 			SET 
-				selected_server_id = ${connection.escape(ctx.server_id)},
-				selected_server_name = ${connection.escape(ctx.server_name)}
+			selected_server_id = ${connection.escape(ctx.server_id)},
+			selected_server_name = ${connection.escape(ctx.server_name)}
 			WHERE id = ${connection.escape(ctx.user_id)}
-        `
+		`
 		const select = `
 			SELECT *
 			FROM User_Channels as uc
 			WHERE 
-				uc.server_id = ${connection.escape(ctx.server_id)}
+			uc.server_id = ${connection.escape(ctx.server_id)}
 			AND
-				uc.user_id = ${connection.escape(ctx.user_id)}
-        `
+			uc.user_id = ${connection.escape(ctx.user_id)}
+		`
 		const statement = [update, select]
 
 		connection.query(statement.join(";"), (err, results: _RowDataPacket[][]) => {
