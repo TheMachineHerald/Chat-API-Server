@@ -7,13 +7,13 @@ function update_home_state(connection: _Pool, user_id: number): Promise<any> {
         `
         connection.query(statement, [user_id], (err, results: _RowDataPacket[]) => {
             if (err) return reject(500)
-			if (!results) {
-				console.log("not found")
-				return reject(404)
-			}
+            if (!results) {
+                console.log("not found")
+                return reject(404)
+            }
 
-			console.log("update home state results: ", results)
-			return resolve()
+            console.log("update home state results: ", results)
+            return resolve()
         })
     })
 }
