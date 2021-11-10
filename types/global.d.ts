@@ -209,4 +209,15 @@ declare global {
                 email: string
             }
     /** ---------------------------------------------------------------------- */
+    /**
+     * [User Route]
+     */
+
+            interface SAVE_USER_MESSAGE_REQUEST {
+                user_id: number
+                friend_id: number
+                friend_user_name: string
+                message: string
+            }
+    /** ---------------------------------------------------------------------- */
 }
