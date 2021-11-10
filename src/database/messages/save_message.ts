@@ -2,13 +2,15 @@ function save_message(connection: _Pool, ctx: SAVE_USER_MESSAGE_REQUEST) {
     return new Promise<void>((resolve, reject) => {
         const statement = `
             INSERT INTO User_Messages
-            (user_id, friend_id, message)
+            (user_id, user_name, friend_id, friend_user_name, message)
             VALUES
-            (?, ?, ?)
+            (?, ?, ?, ?, ?)
         `
         const values = [
             ctx.user_id,
+            ctx.user_name,
             ctx.friend_id,
+            ctx.friend_user_name,
             ctx.message
         ]
 
