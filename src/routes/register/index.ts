@@ -7,10 +7,10 @@ router.post("/", (req: _Request, res: _Response): void => {
 	const user: REGISTER_ROUTE_REQUEST_BODY = req.body
 
 	user_register(db_connection, user)
-		.then((user: REGISTER_ROUTE_PAYLOAD) => {
+		.then((response: REGISTER_ROUTE_RESPONSE) => {
 			res.status(200).json({
 				message: "Created User!",
-				user: user
+				payload: response
 			})
 		})
 		.catch((err: number) => {
@@ -19,11 +19,12 @@ router.post("/", (req: _Request, res: _Response): void => {
 					status: 404,
 					error: "Invalid Request"
 				})
+				return
 			}
 
 			res.status(500).json({
 				status: 500,
-				error: "Not Allowed"
+				error: "Bad Request"
 			})
 		})
 })

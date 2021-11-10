@@ -40,7 +40,6 @@ function get_user(connection: _Pool, email: string) {
             SET status = 1 
             WHERE email = ${connection.escape(email)}
         `
-
         const statement = [user, servers, selected_server_channels]
 
         connection.query(
@@ -60,7 +59,7 @@ function get_user(connection: _Pool, email: string) {
                     if (err) 
                         console.log(err)
 
-                    return resolve(parse(results))
+                    return resolve(parse(results[0][0], results[1], results[2]))
                 })
         })
     })
