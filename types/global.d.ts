@@ -30,7 +30,7 @@ declare global {
     }
 
     declare var db_connection: Global 
-
+    /** ---------------------------------------------------------------------- */
     /**
      * Application Types
      * 
@@ -102,8 +102,10 @@ declare global {
         email: string
         status: number
     }
-    
-    //<Login_Route>
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Login Route]
+     */
             interface LOGIN_ROUTE_PAYLOAD {
                 user: USER
                 servers: Array<SERVER>
@@ -126,9 +128,10 @@ declare global {
              */
 
             type STATUS_CODE = number
-    //</Login_Route>
-
-    //<Register_Route>
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Register Route]
+     */
             interface REGISTER_ROUTE_REQUEST_BODY {
                 first_name: string
                 last_name: string
@@ -154,9 +157,10 @@ declare global {
                 selected_server_name: string
                 create_date: string
             }
-    //</Register_Route>
-
-    //<Channels_Route>
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Channels Route]
+     */
             interface SAVE_MESSAGE_CONTEXT {
                 channel_id: number
                 server_id: number
@@ -180,9 +184,10 @@ declare global {
                 channels: _CHANNELS
                 payload: Object<{ messages: CHANNEL_MESSAGES }>
             }
-    //</Channels_Route>
-
-    //<Servers_Route>
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Servers Route]
+     */
             interface SAVE_SELECTED_SERVER_REQUEST_BODY {
                 user_id: number
                 server_id: number
@@ -192,5 +197,16 @@ declare global {
             interface CREATE_SERVER_REQUEST_BODY {
                 
             }
-    //</Servers_Route>
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Friends Route]
+     */
+            interface FRIENDS_RESPONSE {
+                id: number
+                user_name: string
+                first_name: string
+                last_name: string
+                email: string
+            }
+    /** ---------------------------------------------------------------------- */
 }
