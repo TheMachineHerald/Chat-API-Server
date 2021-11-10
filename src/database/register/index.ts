@@ -1,9 +1,10 @@
 import bcrypt from "bcryptjs"
+import parse from "../login/parse"
 import check_dupe from "./check_dupe"
 require("dotenv").config()
 
 function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
-    return new Promise<REGISTER_ROUTE_PAYLOAD>((resolve, reject) => {
+    return new Promise<REGISTER_ROUTE_RESPONSE>((resolve, reject) => {
         const {
             first_name,
             last_name,
@@ -27,11 +28,6 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
                             ${connection.escape(email)},
                             ${connection.escape(hash)}
                             )
-                        `
-                        const select_user = `
-                            SELECT * FROM
-                            Users
-                            WHERE email = ${connection.escape(email)}
                         `
                         const server = `
                             INSERT INTO Servers
@@ -107,7 +103,7 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
                                 (SELECT id FROM Users WHERE email = ${connection.escape(email)}),
                                 ${connection.escape(user_name)},
                                 'TEXT',
-                                0
+                                1
                             )
                         `
                         const voice_channel = `
@@ -166,15 +162,49 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
                                 0
                             )
                         `
+                        const select_user = `
+                            SELECT
+                            u.id, u.first_name, u.last_name, u.user_name, u.email, u.passwrd, u.status, u.home_selected, u.selected_friend_id, u.selected_friend_user_name, uc.server_id as selected_server_id, uc.server_name as selected_server_name, u.created_date
+                            FROM Users as u
+                            INNER JOIN User_Channels as uc on uc.user_id = u.id
+                            WHERE uc.is_selected = 1 AND u.id = (
+                                SELECT id FROM Users
+                                WHERE email = ${connection.escape(email)}
+                            )
+                        `
+                        const select_servers = `
+                            SELECT 
+                            s.id as server_id, server_name, created_by_user_id
+                            FROM Server_Users as su
+                            JOIN Servers as s 
+                            ON s.id = su.server_id
+                            WHERE su.user_id = (
+                                SELECT id
+                                FROM Users
+                                WHERE email=${connection.escape(email)}
+                            )
+                        `
+                        const select_selected_server_channels = `
+                            SELECT * FROM
+                            User_Channels as uc
+                            WHERE
+                            uc.user_id = (
+                                SELECT id
+                                FROM Users
+                                WHERE email = ${connection.escape(email)}
+                            )
+                        `
                         const statement = [
                             insert_user,
-                            select_user,
                             server,
                             server_user,
                             text_channel,
                             user_text_channel,
                             voice_channel,
-                            user_voice_channel
+                            user_voice_channel,
+                            select_user,
+                            select_servers,
+                            select_selected_server_channels
                         ]
 
                         connection.query(
@@ -185,8 +215,8 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
                                     return reject(500)
                                 }
 
-                                results[1][0].passwrd = password
-                                return resolve(results[1][0])
+                                results[7][0].passwrd = password
+                                return resolve(parse(results[7][0], results[8], results[9]))
                             }
                         )
                     })

@@ -3,7 +3,7 @@
  * 		&&
  * Creates User Object for redux consumption
  */
-function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
+function parse(db_user: USER, db_servers: _RowDataPacket[], db_selected_server: _RowDataPacket[]): LOGIN_ROUTE_PAYLOAD {
 	const servers: Array<SERVER> = []
 	const selected_server: SELECTED_SERVER = {
 		server_id: null,
@@ -17,7 +17,7 @@ function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
 	}
 
 	try {
-		data[1].forEach((row: _RowDataPacket): void => {
+		db_servers.forEach((row: _RowDataPacket): void => {
 			const tmp = Object.assign({})
 			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
@@ -25,7 +25,7 @@ function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
 			servers.push(tmp)
 		})
 
-		data[2].forEach((row: _RowDataPacket): void => {
+		db_selected_server.forEach((row: _RowDataPacket): void => {
 			const tmp = Object.assign({})
 			Object.keys(row).forEach((prop: string) => {
 				tmp[prop] = row[prop]
@@ -51,7 +51,7 @@ function parse(data: _RowDataPacket): LOGIN_ROUTE_PAYLOAD {
 		console.log(e)
 	} finally {
 		return {
-			user: data[0][0],
+			user: db_user,
 			servers: servers,
 			selected_server: selected_server
 		}

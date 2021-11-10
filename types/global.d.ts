@@ -46,6 +46,7 @@ declare global {
             email: string
             passwrd: string
             status: number
+            home_selected: number | boolean
             selected_friend_id: number
             selected_friend_user_name: string
             selected_server_id: number
@@ -147,17 +148,10 @@ declare global {
                 reject: _reject<number>
             }
 
-            interface REGISTER_ROUTE_PAYLOAD {
-                id: number
-                first_name: string
-                last_name: string
-                user_name: string
-                email: string
-                passwrd: string
-                status: number
-                created_date: string
-                selected_server_name: string
-                create_date: string
+            interface REGISTER_ROUTE_RESPONSE {
+                user: USER
+                servers: Array<Servers>
+                selected_server: SELECTED_SERVER
             }
     /** ---------------------------------------------------------------------- */
     /**
