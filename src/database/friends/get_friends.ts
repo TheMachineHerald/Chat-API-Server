@@ -1,9 +1,12 @@
-function get_friends(connection: _Pool, user_id: number) {
+function get_friends(connection: _Pool, user_id: number): Promise<_RowDataPacket[]> {
 	return new Promise<_RowDataPacket[]>((resolve, reject) => {
 		const statement = `
-			SELECT * FROM
-			Friends
-			WHERE user_id = ?
+			SELECT
+			u.id, u.user_name, u.first_name, u.last_name, u.email, u.status
+			FROM Users as u
+			INNER JOIN Friends as f
+			ON u.id = f.friend_id
+			WHERE f.user_id = ?
    		 `
 		connection.query(statement, [user_id], (err, results: _RowDataPacket[]) => {
 			if (err) return reject(500)
@@ -12,7 +15,6 @@ function get_friends(connection: _Pool, user_id: number) {
 				return reject(404)
 			}
 
-			console.log("get friends results: ", results)
 			return resolve(results)
 		})
 	})
