@@ -38,70 +38,72 @@ declare global {
      *       capitalized and snake cased
      */
 
-     interface USER {
-        id: number
-        first_name: string
-        last_name: string
-        user_name: string
-        email: string
-        passwrd: string
-        status: number
-        selected_server_id: number
-        selected_server_name: string
-        created_date: string
-    }
+        interface USER {
+            id: number
+            first_name: string
+            last_name: string
+            user_name: string
+            email: string
+            passwrd: string
+            status: number
+            selected_friend_id: number
+            selected_friend_user_name: string
+            selected_server_id: number
+            selected_server_name: string
+            created_date: string
+        }
 
-    interface SERVER {
-        server_id: number
-        server_name: string
-        created_by_user_id: number
-    }
+        interface SERVER {
+            server_id: number
+            server_name: string
+            created_by_user_id: number
+        }
 
-    interface SELECTED_SERVER {
-        server_id: number | null
-        server_name: string
-        selected_channel_id: number | null
-        selected_channel_name: string
-        channels: Object<CHANNELS>
-    }
+        interface SELECTED_SERVER {
+            server_id: number | null
+            server_name: string
+            selected_channel_id: number | null
+            selected_channel_name: string
+            channels: Object<CHANNELS>
+        }
 
-     interface CHANNEL {
-        id: number
-        channel_id: number
-        channel_name: string
-        server_id: number
-        server_name: string
-        user_id: number
-        user_name: string
-        created_date: string
-        type: string
-        is_selected: number
-    }
+        interface CHANNEL {
+            id: number
+            channel_id: number
+            channel_name: string
+            server_id: number
+            server_name: string
+            user_id: number
+            user_name: string
+            created_date: string
+            type: string
+            is_selected: number
+        }
 
-    interface CHANNELS {
-        text: Array<CHANNEL>
-        voice: Array<CHANNEL>
-    }
+        interface CHANNELS {
+            text: Array<CHANNEL>
+            voice: Array<CHANNEL>
+        }
 
-    interface CHANNEL_MESSAGES {
-        id: number
-        channel_id: number
-        server_id: number
-        user_id: number
-        user_name: string
-        message: string
-        created_date: string
-    }
+        interface CHANNEL_MESSAGES {
+            id: number
+            channel_id: number
+            server_id: number
+            user_id: number
+            user_name: string
+            message: string
+            created_date: string
+        }
 
 
-    interface CHANNEL_USER {
-        id: number
-        user_name: string
-        first_name: string
-        last_name: string
-        email: string
-        status: number
-    }
+        interface CHANNEL_USER {
+            id: number
+            user_name: string
+            first_name: string
+            last_name: string
+            email: string
+            status: number
+        }
     /** ---------------------------------------------------------------------- */
     /**
      * [Login Route]
@@ -207,6 +209,24 @@ declare global {
                 first_name: string
                 last_name: string
                 email: string
+            }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [User Route]
+     */
+
+            interface SAVE_USER_MESSAGE_REQUEST {
+                user_id: number
+                user_name: string
+                friend_id: number
+                friend_user_name: string
+                message: string
+            }
+
+            interface SAVE_SELECTED_FRIEND_REQUEST {
+                user_id: number
+                friend_id: number
+                friend_user_name: string
             }
     /** ---------------------------------------------------------------------- */
 }
