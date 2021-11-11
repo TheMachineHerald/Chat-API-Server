@@ -5,7 +5,7 @@ function get_user_messages(connection: _Pool, user_id: number, friend_id: number
 			User_Messages
 			WHERE 
 			user_id in(${connection.escape(user_id)}, ${connection.escape(friend_id)})
-			OR
+			AND
 			friend_id in(${connection.escape(user_id)}, ${connection.escape(friend_id)})
 			ORDER BY created_date
 			DESC LIMIT 50
