@@ -5,14 +5,14 @@ function get_channels(connection: _Pool, user_id: number) {
 			Channels
 			WHERE created_by_user_id = ?;
 		`
-		connection.query(statement, [user_id], (err, results: _RowDataPacket[]) => {
+		connection.query(statement, [user_id], (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("not found")
 				return reject(404)
 			}
 
-			return resolve(results)
+			return resolve(response)
 		})
 	})
 }

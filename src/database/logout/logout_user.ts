@@ -5,9 +5,9 @@ function logout_user(connection: _Pool, user_id: number) {
 			SET status = 4
 			WHERE id = ${connection.escape(user_id)}
 		`
-		connection.query(statement, (err: Error, results: _RowDataPacket) => {
+		connection.query(statement, (err: Error, response: _RowDataPacket) => {
 			if (err) console.log(err)
-			if (!results) {
+			if (!response) {
 				console.log("failed user status update")
 			}
 

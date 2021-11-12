@@ -109,7 +109,7 @@ declare global {
     /**
      * [Login Route]
      */
-            interface LOGIN_ROUTE_PAYLOAD {
+            interface LOGIN_ROUTE_RESPONSE {
                 user: USER
                 servers: Array<SERVER>
                 selected_server: SELECTED_SERVER
@@ -176,7 +176,7 @@ declare global {
                 selected_channel_name: string
             }
 
-            interface SAVE_SELECTED_CHANNEL_PAYLOAD {
+            interface SAVE_SELECTED_CHANNEL_RESPONSE {
                 channels: _CHANNELS
                 payload: Object<{ messages: CHANNEL_MESSAGES }>
             }

@@ -8,8 +8,8 @@ import get_data from "./hydrate"
 function hydrate_user(connection: _Pool, user_id: number) {
 	return new Promise<_RowDataPacket[]>((resolve, reject) => {
 		get_data(connection, user_id)
-			.then((data: _RowDataPacket[]) => {
-				resolve(data)
+			.then((get_data_resolve: _RowDataPacket[]) => {
+				resolve(get_data_resolve)
 			})
 			.catch((err: STATUS_CODE) => {
 				console.log(err)

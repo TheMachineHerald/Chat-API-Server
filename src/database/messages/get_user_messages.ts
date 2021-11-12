@@ -10,14 +10,14 @@ function get_user_messages(connection: _Pool, user_id: number, friend_id: number
 			ORDER BY created_date
 			DESC LIMIT 50
 		`
-		connection.query(statement, (err, results: _RowDataPacket[]) => {
+		connection.query(statement, (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("not found")
 				return reject(404)
 			}
 
-			return resolve(results)
+			return resolve(response)
 		})
 	})
 }

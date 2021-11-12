@@ -14,7 +14,7 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
         } = user
 
         check_dupe(connection, email)
-            .then(response => {
+            .then(check_dupe_response => {
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(password, salt, (err, hash) => {
                         const insert_user = `
@@ -209,14 +209,14 @@ function user_register(connection: _Pool, user: REGISTER_ROUTE_REQUEST_BODY) {
 
                         connection.query(
                             statement.join(";"),
-                            (err, results: _RowDataPacket) => {
+                            (err, register_response: _RowDataPacket) => {
                                 if (err) {
                                     console.log(err)
                                     return reject(500)
                                 }
 
-                                results[7][0].passwrd = password
-                                return resolve(parse(results[7][0], results[8], results[9]))
+                                register_response[7][0].passwrd = password
+                                return resolve(parse(register_response[7][0], register_response[8], register_response[9]))
                             }
                         )
                     })

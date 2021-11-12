@@ -53,14 +53,14 @@ function save_selected_server(connection: _Pool, ctx: SAVE_SELECTED_SERVER_REQUE
 		`
 		const statement = [update, select]
 
-		connection.query(statement.join(";"), (err, results: _RowDataPacket[][]) => {
+		connection.query(statement.join(";"), (err, response: _RowDataPacket[][]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("failed query")
 				return reject(404)
 			}
 
-			return resolve(parse(results))
+			return resolve(parse(response))
 		})
 	})
 }

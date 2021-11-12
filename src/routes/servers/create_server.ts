@@ -7,10 +7,10 @@ router.post("/", (req: _Request, res: _Response): void  => {
 	const user: CREATE_SERVER_REQUEST_BODY = req.body
 
 	create_server(db_connection, user)
-		.then((server: _RowDataPacket[]) => {
+		.then((resolve: _RowDataPacket[]) => {
 			res.status(200).json({
 				message: "Created Server!",
-				server: server
+				server: resolve
 			})
 		})
 		.catch((err: number) => {

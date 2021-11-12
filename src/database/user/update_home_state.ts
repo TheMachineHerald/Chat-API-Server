@@ -5,14 +5,14 @@ function update_home_state(connection: _Pool, user_id: number): Promise<any> {
             SET home_selected = !home_selected
             WHERE id = ?
         `
-        connection.query(statement, [user_id], (err, results: _RowDataPacket[]) => {
+        connection.query(statement, [user_id], (err, response: _RowDataPacket[]) => {
             if (err) return reject(500)
-            if (!results) {
+            if (!response) {
                 console.log("not found")
                 return reject(404)
             }
 
-            console.log("update home state results: ", results)
+            console.log("update home state response: ", response)
             return resolve()
         })
     })

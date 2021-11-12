@@ -13,14 +13,14 @@ function save_selected_friend(connection: _Pool, ctx: SAVE_SELECTED_FRIEND_REQUE
             ctx.user_id
         ]
 
-        connection.query(statement, values, (err, results: _RowDataPacket[]) => {
+        connection.query(statement, values, (err, response: _RowDataPacket[]) => {
             if (err) return reject(500)
-            if (!results) {
+            if (!response) {
                 console.log("not found")
                 return reject(404)
             }
 
-            console.log("save selected friend results: ", results)
+            console.log("save selected friend response: ", response)
             return resolve()
         })
     })

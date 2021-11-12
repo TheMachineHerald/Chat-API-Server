@@ -7,9 +7,9 @@ router.get("/:user_id", (req: _Request, res: _Response): void => {
 	const user_id: number = parseInt(req.params.user_id)
 
 	get_friends(db_connection, user_id)
-		.then((friends: _RowDataPacket[]): void => {
+		.then((resolve: _RowDataPacket[]): void => {
 			res.status(200).json({
-				friends: friends
+				friends: resolve
 			})
 		})
 		.catch((err: STATUS_CODE): void => {

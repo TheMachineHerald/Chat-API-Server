@@ -7,14 +7,14 @@ function get_data(connection: _Pool, user_id: number) {
 			WHERE user_id = ${connection.escape(user_id)}
 			AND is_selected = 1
 		`
-		connection.query(statement, (err, results: _RowDataPacket[]) => {
+		connection.query(statement, (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("not found")
 				return reject(404)
 			}
 
-			return resolve(results)
+			return resolve(response)
 		})
 	})
 }

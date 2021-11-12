@@ -14,9 +14,9 @@ function save_message(connection: _Pool, ctx: SAVE_MESSAGE_CONTEXT) {
 			ctx.message
 		]
 
-		connection.query(statement, values, (err, results: _RowDataPacket[]) => {
+		connection.query(statement, values, (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("failed message insert")
 				return reject(404)
 			}

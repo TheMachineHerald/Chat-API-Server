@@ -16,18 +16,18 @@ function check_dupe(connection: _Pool, email: string) {
 		connection.query(
 			statement,
 			email,
-			(err, results: _RowDataPacket[]) => {
+			(err, response: _RowDataPacket[]) => {
 				if (err) {
 					console.log(err)
 					return reject(500)
 				}
 
-				if (!results) {
-					console.log("invalid request: ", results)
+				if (!response) {
+					console.log("invalid request: ", response)
 					return reject(400)
 				}
 
-				return parse(results[0], { resolve: resolve, reject: reject })
+				return parse(response[0], { resolve: resolve, reject: reject })
 			})
 	})
 }

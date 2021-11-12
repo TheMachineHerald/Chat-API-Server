@@ -2,14 +2,14 @@ import bcrypt from "bcryptjs"
 import get_user from "./get_user"
 
 function user_login(connection: _Pool, user: LOGIN_ROUTE_BODY) {
-	return new Promise<LOGIN_ROUTE_PAYLOAD>((resolve, reject) => {
+	return new Promise<LOGIN_ROUTE_RESPONSE>((resolve, reject) => {
 		const { email, password } = user
 
 		get_user(connection, email)
-			.then((payload: LOGIN_ROUTE_PAYLOAD) => {
+			.then((get_user_resolve: LOGIN_ROUTE_RESPONSE) => {
 				bcrypt.compare(
 					password,
-					payload.user.passwrd.toString(),
+					get_user_resolve.user.passwrd.toString(),
 					(err: Error, result: boolean) => {
 						if (err) {
 							console.log("err in bcrypt compare: ", err)
@@ -20,8 +20,8 @@ function user_login(connection: _Pool, user: LOGIN_ROUTE_BODY) {
 
 						// auth user with session token/cookie
 						// for dev just resolve and continue program execution
-						payload.user.passwrd = password
-						return resolve(payload)
+						get_user_resolve.user.passwrd = password
+						return resolve(get_user_resolve)
 					})
 			})
 			.catch((err: STATUS_CODE) => {

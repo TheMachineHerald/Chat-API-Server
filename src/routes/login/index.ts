@@ -7,10 +7,10 @@ router.post("/", (req: _Request, res: _Response): void => {
 	// sanitize data > validate(req.body)
 	const { email, password }: LOGIN_ROUTE_BODY = req.body
 	user_login(db_connection, { email: email, password: password })
-		.then((payload: LOGIN_ROUTE_PAYLOAD) => {
+		.then((resolve: LOGIN_ROUTE_RESPONSE) => {
 			res.status(200).json({
 				message: "Logged In!",
-				payload: payload
+				payload: resolve
 			})
 		})
 		.catch((err: STATUS_CODE) => {

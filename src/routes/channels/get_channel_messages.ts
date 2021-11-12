@@ -7,9 +7,9 @@ router.get("/:channel_id", (req: _Request, res: _Response): void => {
 	const channel_id: number = parseInt(req.params.channel_id)
 
 	get_channel_messages(db_connection, channel_id)
-		.then((messages: _RowDataPacket[])=> {
+		.then((resolve: _RowDataPacket[])=> {
 			res.status(200).json({
-				messages: messages
+				messages: resolve
 			})
 		})
 		.catch((err: STATUS_CODE) => {

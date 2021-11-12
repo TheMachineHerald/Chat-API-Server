@@ -12,9 +12,9 @@ router.get("/:user_id", (req: _Request, res: _Response): void => {
 	const user_id: number = parseInt(req.params.user_id)
 
 	get_servers(db_connection, user_id)
-		.then((servers: _RowDataPacket[]) => {
+		.then((resolve: _RowDataPacket[]) => {
 			res.status(200).json({
-				servers: servers
+				servers: resolve
 			})
 		})
 		.catch((err: STATUS_CODE) => {

@@ -7,8 +7,8 @@ router.post("/", (req: _Request, res: _Response): void => {
 	const ctx: SAVE_SELECTED_CHANNEL_REQUEST_BODY = req.body
 
 	save_selected_channel(db_connection, ctx)
-		.then((payload: SAVE_SELECTED_CHANNEL_PAYLOAD) => {
-			res.status(200).json(payload)
+		.then((resolve: SAVE_SELECTED_CHANNEL_RESPONSE) => {
+			res.status(200).json(resolve)
 		})
 		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger

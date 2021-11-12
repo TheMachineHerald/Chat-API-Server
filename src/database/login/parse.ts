@@ -3,7 +3,7 @@
  * 		&&
  * Creates User Object for redux consumption
  */
-function parse(db_user: USER, db_servers: _RowDataPacket[], db_selected_server: _RowDataPacket[]): LOGIN_ROUTE_PAYLOAD {
+function parse(db_user: USER, db_servers: _RowDataPacket[], db_selected_server: _RowDataPacket[]): LOGIN_ROUTE_RESPONSE {
 	const servers: Array<SERVER> = []
 	const selected_server: SELECTED_SERVER = {
 		server_id: null,

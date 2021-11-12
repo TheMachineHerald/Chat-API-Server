@@ -64,9 +64,9 @@ router.get("/:user_id/messages/:friend_id", (req: _Request, res: _Response): voi
 	const friend_id: number = parseInt(req.params.friend_id)
 
 	get_user_messages(db_connection, user_id, friend_id)
-		.then((messages: _RowDataPacket[])=> {
+		.then((resolve: _RowDataPacket[])=> {
 			res.status(200).json({
-				messages: messages
+				messages: resolve
 			})
 		})
 		.catch((err: STATUS_CODE) => {

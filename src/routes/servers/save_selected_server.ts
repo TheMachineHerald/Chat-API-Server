@@ -7,8 +7,8 @@ router.post("/", (req: _Request, res: _Response): void => {
 	const { user_id, server_id, server_name }: SAVE_SELECTED_SERVER_REQUEST_BODY = req.body
 
 	save_selected_server(db_connection, { user_id, server_id, server_name })
-		.then((payload: SELECTED_SERVER)=> {
-			res.status(200).json(payload)
+		.then((resolve: SELECTED_SERVER)=> {
+			res.status(200).json(resolve)
 		})
 		.catch((err: STATUS_CODE) => {
 			// rewrite this to send error to middle ware logger

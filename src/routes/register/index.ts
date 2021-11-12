@@ -7,10 +7,10 @@ router.post("/", (req: _Request, res: _Response): void => {
 	const user: REGISTER_ROUTE_REQUEST_BODY = req.body
 
 	user_register(db_connection, user)
-		.then((response: REGISTER_ROUTE_RESPONSE) => {
+		.then((resolve: REGISTER_ROUTE_RESPONSE) => {
 			res.status(200).json({
 				message: "Created User!",
-				payload: response
+				payload: resolve
 			})
 		})
 		.catch((err: number) => {

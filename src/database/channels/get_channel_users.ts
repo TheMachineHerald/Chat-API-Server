@@ -8,13 +8,13 @@ function get_channel_users(connection: _Pool, channel_id: number) {
 			ON uc.user_id = u.id
 			AND uc.channel_id = ?
 		`
-		connection.query(statement, [channel_id], (err, results: _RowDataPacket[]) => {
+		connection.query(statement, [channel_id], (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("not found")
 				return reject(404)
 			}
-			return resolve(parse(results))
+			return resolve(parse(response))
 		})
 	})
 }

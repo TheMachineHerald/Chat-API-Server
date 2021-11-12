@@ -8,14 +8,14 @@ function get_channel_messages(connection: _Pool, channel_id: number) {
 			DESC LIMIT 50;
 		`
 
-		connection.query(statement, [channel_id], (err, results: _RowDataPacket[]) => {
+		connection.query(statement, [channel_id], (err, response: _RowDataPacket[]) => {
 			if (err) return reject(500)
-			if (!results) {
+			if (!response) {
 				console.log("not found")
 				return reject(404)
 			}
 
-			return resolve(results)
+			return resolve(response)
 		})
 	})
 }

@@ -1,7 +1,7 @@
 import parse from "./parse"
 
 function get_user(connection: _Pool, email: string) {
-    return new Promise<LOGIN_ROUTE_PAYLOAD>((resolve, reject) => {
+    return new Promise<LOGIN_ROUTE_RESPONSE>((resolve, reject) => {
         const user = `
             SELECT * FROM
             Users
@@ -44,14 +44,14 @@ function get_user(connection: _Pool, email: string) {
 
         connection.query(
             statement.join(";"),
-            (err: Error, results: _RowDataPacket) => {
+            (err: Error, select_response: _RowDataPacket) => {
                 if (err) {
                     console.log(err)
                     return reject(500)
                 }
 
-                if (!results) {
-                    console.log("does not exist: ", results)
+                if (!select_response) {
+                    console.log("does not exist: ", select_response)
                     return reject(404)
                 }
 
@@ -59,7 +59,7 @@ function get_user(connection: _Pool, email: string) {
                     if (err) 
                         console.log(err)
 
-                    return resolve(parse(results[0][0], results[1], results[2]))
+                    return resolve(parse(select_response[0][0], select_response[1], select_response[2]))
                 })
         })
     })
